@@ -4,19 +4,21 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=8.0",
         "ext-ctype": "*",
         "ext-dom": "*",
         "ext-iconv": "*",
         "symfony/browser-kit": "5.2.*",
         "symfony/console": "5.2.*",
         "symfony/css-selector": "5.2.*",
+        "symfony/dom-crawler": "5.2.*",
         "symfony/dotenv": "5.2.*",
         "symfony/flex": "^1.3.1",
         "symfony/framework-bundle": "5.2.*",
         "symfony/monolog-bundle": "^3.6",
         "symfony/phpunit-bridge": "^5.2",
-        "symfony/yaml": "5.2.*"
+        "symfony/yaml": "5.2.*",
+        "ext-simplexml": "*"
     },
     "config": {
         "optimize-autoloader": true,

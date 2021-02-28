@@ -4,6 +4,13 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    # register suppliers here
+    registeredSuppliers:
+        supplier1: App\Supplier\Supplier1
+    # register parsers here
+    registeredParsers:
+        xml: App\Parser\XmlParser
+    logFilePath: '%kernel.project_dir%/var/log/supplier.log'
 
 services:
     # default configuration for services in *this* file
@@ -31,5 +38,12 @@ services:
     # please note that last definitions always *replace* previous ones
 
     App\Listener\ProductsListener:
+        arguments: { $logFilePath: '%logFilePath%', $logger: null }
         tags:
             - { name: kernel.event_listener, event: app.get_product, method: logProducts, priority: 1 }
+
+    App\Supplier\Factory:
+        arguments: { $registeredSuppliers: '%registeredSuppliers%' }
+
+    App\Parser\Factory:
+        arguments: { $registeredParsers: '%registeredParsers%' }

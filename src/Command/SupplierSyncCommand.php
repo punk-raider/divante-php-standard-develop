@@ -39,20 +39,25 @@ class SupplierSyncCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $name = $input->getArgument('supplier');
+        assert(is_string($name));
+
         $io->info('Synchronising supplier ' . $name);
 
         try {
-            //todo Get the products
+            $supplier = $this->supplierFactory->getSupplier($name);
+            $products = $supplier->getProducts();
 
             $table = new Table($output);
             $table->setHeaders(array('ID', 'Name', 'Desc'))->setRows($products);
             $table->render();
-
-        } catch (\InvalidArgumentException | InvalidParserException $exception) {
+        } catch (\RuntimeException | \DomainException $exception) {
             $output->writeln('<error>' . $exception->getMessage() . '</error>');
+
+            return Command::FAILURE;
         }
 
         $io->success('Done!');
+
         return Command::SUCCESS;
     }
 }

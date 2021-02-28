@@ -10,16 +10,14 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ProductsListener
 {
-    const FILENAME_PATH = './var/log/supplier.log';
+    private LoggerInterface $logger;
 
-    protected LoggerInterface $logger;
-
-    public function __construct(LoggerInterface $logger = null)
+    public function __construct(string $logFilePath, LoggerInterface $logger = null)
     {
         $this->logger = $logger ?? new Logger(
-                'suppliers_logger',
-                [new StreamHandler(self::FILENAME_PATH, Logger::INFO)]
-            );
+            'suppliers_logger',
+            [new StreamHandler($logFilePath, Logger::INFO, false)]
+        );
     }
 
     public function logProducts(Event $event): bool

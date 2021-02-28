@@ -11,12 +11,12 @@ interface SupplierInterface
     public function __construct(ParserInterface $parser, EventDispatcher $eventDispatcher);
 
     /**
-     * @return array
+     * @return mixed[]
      * @throws InvalidParserException
      */
     public function getProducts(): array;
 
-    public static function getName(): string;
-
     public static function getResponseType(): string;
+
+    public static function getName(): string;
 }

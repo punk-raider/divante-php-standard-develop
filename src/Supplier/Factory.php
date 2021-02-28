@@ -2,27 +2,39 @@
 
 namespace App\Supplier;
 
-use App\Event\IntegrationEvents;
-use App\Listener\ProductsListener;
+use App\Exception\SupplierNotFoundException;
 use App\Parser\FactoryInterface as ParserFactoryInterface;
-
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class Factory implements FactoryInterface
 {
-    const SUPPLIER_1 = 'supplier1';
-    const SUPPLIER_2 = 'supplier2';
-    const SUPPLIER_3 = 'supplier3';
+    private ParserFactoryInterface $parserFactory;
+    /** @var string[]  */
+    private array $registeredSuppliers;
+    private EventDispatcherInterface $eventDispatcher;
 
-    protected ParserFactoryInterface $parserFactory;
-
-    public function __construct(ParserFactoryInterface $parserFactory)
-    {
+    /**
+     * @param string[] $registeredSuppliers
+     */
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        ParserFactoryInterface $parserFactory,
+        array $registeredSuppliers
+    ) {
         $this->parserFactory = $parserFactory;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->registeredSuppliers = $registeredSuppliers;
     }
 
     public function getSupplier($supplierName): SupplierInterface
     {
-        //todo Get the correct supplier
+        $supplierClassName = $this->registeredSuppliers[$supplierName];
+        if (!is_string($supplierClassName)) {
+            throw new SupplierNotFoundException($supplierName);
+        }
+        $responseType = $supplierClassName::getResponseType();
+        $parser = $this->parserFactory->getParser($responseType);
+
+        return new $supplierClassName($parser, $this->eventDispatcher);
     }
 }
