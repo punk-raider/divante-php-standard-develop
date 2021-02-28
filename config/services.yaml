@@ -7,6 +7,7 @@ parameters:
     # register suppliers here
     registeredSuppliers:
         supplier1: App\Supplier\Supplier1
+        supplier2: App\Supplier\Supplier2
     # register parsers here
     registeredParsers:
         xml: App\Parser\XmlParser
