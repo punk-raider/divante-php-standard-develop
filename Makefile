@@ -48,3 +48,7 @@ cq: phpcbf phpcs-fixer phpstan phpcs
 .PHONY: phpcs-fixer
 phpcs-fixer:
 		docker-compose run --rm php sh -lc './vendor/bin/php-cs-fixer fix ./src/ --rules=blank_line_before_statement'
+
+.PHONY: supplier-sync
+supplier-sync:
+		docker-compose run --rm php sh -lc 'php ./bin/console divante:supplier-sync $(supplier)'

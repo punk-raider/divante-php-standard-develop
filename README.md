@@ -34,3 +34,8 @@ and technical requirements.
 It is possible to modify structures in order to achieve a business result and meet the technical requirements.
 It is possible to use further or different libraries than those existing in the structure, which should be added in
 `composer.json`
+
+### Solution
+App runs inside the container only.   
+Run from outside the container: `make supplier-sync supplier=supplier_name`   
+Run from inside the container: `php bin/console divante:supplier-sync name_supplier`

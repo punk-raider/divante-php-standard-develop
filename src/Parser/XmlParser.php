@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Parser;
 
 use App\Exception\InvalidParserException;
-use Symfony\Component\DomCrawler\Crawler;
 
 class XmlParser implements ParserInterface
 {

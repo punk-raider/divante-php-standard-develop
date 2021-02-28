@@ -9,7 +9,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class Factory implements FactoryInterface
 {
     private ParserFactoryInterface $parserFactory;
-    /** @var string[]  */
+    /** @var string[] */
     private array $registeredSuppliers;
     private EventDispatcherInterface $eventDispatcher;
 

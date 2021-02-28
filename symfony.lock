@@ -68,9 +68,6 @@
             "phpcs.xml.dist"
         ]
     },
-    "symfony/browser-kit": {
-        "version": "v5.2.1"
-    },
     "symfony/cache": {
         "version": "v5.2.1"
     },
@@ -100,9 +97,6 @@
     },
     "symfony/deprecation-contracts": {
         "version": "v2.2.0"
-    },
-    "symfony/dom-crawler": {
-        "version": "v5.2.1"
     },
     "symfony/dotenv": {
         "version": "v5.2.1"

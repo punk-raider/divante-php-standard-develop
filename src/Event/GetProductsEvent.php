@@ -6,7 +6,8 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class GetProductsEvent extends Event
 {
-    public const NAME = 'app.get_product';
+    public const NAME = 'supplier.getProducts';
+
     /** @var mixed[]  */
     private array $products;
 

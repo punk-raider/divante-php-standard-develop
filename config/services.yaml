@@ -8,9 +8,11 @@ parameters:
     registeredSuppliers:
         supplier1: App\Supplier\Supplier1
         supplier2: App\Supplier\Supplier2
+        supplier3: App\Supplier\Supplier3
     # register parsers here
     registeredParsers:
         xml: App\Parser\XmlParser
+        json: App\Parser\JsonParser
     logFilePath: '%kernel.project_dir%/var/log/supplier.log'
 
 services:
@@ -41,7 +43,7 @@ services:
     App\Listener\ProductsListener:
         arguments: { $logFilePath: '%logFilePath%', $logger: null }
         tags:
-            - { name: kernel.event_listener, event: app.get_product, method: logProducts, priority: 1 }
+            - { name: kernel.event_listener, event: supplier.getProducts, method: logProducts, priority: 1 }
 
     App\Supplier\Factory:
         arguments: { $registeredSuppliers: '%registeredSuppliers%' }
