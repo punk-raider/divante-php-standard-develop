@@ -7,7 +7,7 @@ namespace App\Supplier;
 use App\Exception\BadResponseException;
 use App\Exception\InvalidParserException;
 
-class Supplier2  extends SupplierAbstract
+class Supplier2 extends SupplierAbstract
 {
     public static function getName(): string
     {

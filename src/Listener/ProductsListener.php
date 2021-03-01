@@ -12,6 +12,9 @@ class ProductsListener
 {
     private LoggerInterface $logger;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __construct(string $logFilePath, LoggerInterface $logger = null)
     {
         $this->logger = $logger ?? new Logger(

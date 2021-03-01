@@ -21,8 +21,8 @@ class Factory implements FactoryInterface
 
     public function getParser(string $type): ParserInterface
     {
-        $parserClassName = $this->registeredParsers[$type];
-        if (!is_string($parserClassName)) {
+        $parserClassName = $this->registeredParsers[$type] ?? null;
+        if ($parserClassName === null) {
             throw new ParserNotFoundException($type);
         }
 

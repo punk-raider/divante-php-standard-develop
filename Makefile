@@ -20,15 +20,15 @@ composer-update: ## Update project dependencies
 
 .PHONY: up
 up: ## spin up environment
-		docker-compose -f docker-compose.yml -f docker-compose.mock.yml up -d
+		docker-compose up -d
 
 .PHONY: tests
-tests-all: ## execute project tests
-		docker-compose exec php sh -lc "./vendor/bin/phpunit"
+tests: ## execute project tests
+		docker-compose exec php sh -lc "vendor/bin/phpunit"
 
 .PHONY: tests-coverage
 tests-coverage: ## execute project tests code coverage generation
-		docker-compose exec php sh -lc "php vendor/bin/phpunit tests/Unit --coverage-html tests/CodeCoverage"
+		docker-compose exec php sh -lc "php -n -dzend_extension=xdebug -dxdebug.mode=coverage vendor/bin/phpunit tests --coverage-html tests/CodeCoverage"
 
 .PHONY: phpstan
 phpstan: ## executes php stan

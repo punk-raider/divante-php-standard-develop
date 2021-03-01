@@ -28,8 +28,8 @@ class Factory implements FactoryInterface
 
     public function getSupplier($supplierName): SupplierInterface
     {
-        $supplierClassName = $this->registeredSuppliers[$supplierName];
-        if (!is_string($supplierClassName)) {
+        $supplierClassName = $this->registeredSuppliers[$supplierName] ?? null;
+        if ($supplierClassName === null) {
             throw new SupplierNotFoundException($supplierName);
         }
         $responseType = $supplierClassName::getResponseType();
